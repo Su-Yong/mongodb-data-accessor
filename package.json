@@ -1,0 +1,24 @@
+{
+  "name": "mongodb-data-accessor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Su-Yong/mongodb-data-accessor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Su-Yong/mongodb-data-accessor/issues"
+  },
+  "homepage": "https://github.com/Su-Yong/mongodb-data-accessor#readme",
+  "dependencies": {
+    "@su-yong/database-interface": "^1.0.0",
+    "bson-objectid": "^1.3.0"
+  }
+}
