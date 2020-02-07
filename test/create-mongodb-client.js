@@ -1,11 +1,22 @@
-const { MongoMemoryServer } = require('mongodb-memory-server');
 const { MongoClient } = require('mongodb');
-
-const mongod = new MongoMemoryServer();
+const { MongoMemoryReplSet } = require('mongodb-memory-server');
 
 async function connect() {
-  const uri = await mongod.getUri();
-  const client = await MongoClient.connect(uri);
+  const replSet = new MongoMemoryReplSet({
+    debug: false,
+    replSet: {
+      storageEngine: 'wiredTiger',
+    },
+  });
+
+  await replSet.waitUntilRunning();
+  const uri = await replSet.getUri();
+
+  const client = await MongoClient.connect(`${uri}?replicaSet=rs`);
+  await client.db().executeDbAdminCommand({
+    setParameter: 1,
+    maxTransactionLockRequestTimeoutMillis: 5000,
+  });
 
   return client;
 }
